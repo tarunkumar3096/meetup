@@ -1,0 +1,67 @@
+:data-uri:
+= *USER SPACE NETWORK DRIVER FOR SPI BASED ETHERNET CONTROLLER*
+
+== *BLOCK DIAGRAM:*
+image::spi_ethernet.JPG[width="1000"]
+
+
+== *TAP/TUN INTERFACE:*
+* SOFTWARE-ONLY INTERFACES
+* USES USERSPACE PROGRAM INSTEAD OF WIRES
+* FILE DESCRIPTOR
+* TAP - ETHERNET PACKETS
+* TUN - IP ADDRESSES
+
+
+== *VF51:*
+=== *FEATURES OF SPI IN VYBRID:*
+----------------------------------------------------------------------
+1. Colibri VFxx has four SPI controllers.
+2. full duplex, synchronous, serial communication
+3. Up to 25Mbit/s
+4. Master and Slave mode
+5. Up to 6 peripheral chip selects
+6. DMA support.
+-----------------------------------------------------------------------
+
+== *LEARNT SO FAR:*
+=== *REQUIRED FILES:*
+* zImage
+* Rootfs - uRamdisk
+* Device Tree Bog (DTB)
+
+== *WORKING OF SPI INTERFACE:*
+=== *TEST 1:*
+* MASTER   : ZKIT-ARM-1343
+* SLAVE    : ZKIT-ARM-1343
+* ISSUE    : ZKIT-ARM-1343 has LCD with SPI interface
+* RESOLVED : SLAVE - UART - PC
+
+=== *TEST 2:*
+* MASTER : ZKIT-ARM-VF51
+* SLAVE  : ZKIT-ARM-1343
+
+== *ETHERNET CONTROLLER (ENC28J60):*
+=== *REGISTERS:*
+* PHY REGISTER
+* CONTROL  REGISTER
+
+=== PHY REGISTER
+image::PHY.png[width="1000"]
+
+* PHY registers are not directly accessible through the SPI control interface.
+* Instead, use a special set of MAC control registers.
+
+
+=== CONTROL REGISTER
+image::CONTROL.png[width="1000"]
+
+* Main interface between the host controller and the On-chip ethernet controller logic
+* Banks can be selected by bank select bits, BSEL1:BSEL0, in the ECON1 register.
+
+== *THANK YOU :)*
+
+
+
+
+

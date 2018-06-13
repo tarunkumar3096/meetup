@@ -1,0 +1,86 @@
+:data-uri:
+
+= RFID - Userspace input driver
+Ranjithkumar.S, Kewal Ukunde, Subash G
+
+== Project flow
+image::Diagram1.png[length="800",width="800"]
+
+== Input Subsystem
+* Part of Linux Kernel.
+* Manages various Input devices.
+* Included in the kernel because
+** Devices usually accessed through special hardware interfaces.
+** which are protected and managed by the kernel.
+
+== Elements in Input Subsystem
+image::driver.jpg[length="800",width="800"]
+. Input core
+. Drivers
+. Event handlers
+* Various Elements Communicate through *EVENTS*
+
+=== Working
+. Drivers Communicate with low-level hardware.
+. Drivers convert hardware version data into Standard event format.
+. Event is sent to the input core.
+. Input core uses standard kernel plugin design with
+.. input_register_device() - to add a device.
+.. input_unregister_device() - to remove a device.
+... both uses input_dev structure as argument.
+... input_dev structure holds specific capabilities of a device, type of input, device type, etc..
+. To make use of input_events from core, handlers provides user space interface.
+
+== Events
+
+=== type
+* generic type of event being reported.
+* Eg:
+** a key press (EV_KEY)
+** relative motion (like moving a mouse) (EV_REL)
+** absolute motion (like moving a joystick) (EV_ABS)
+
+=== code
+* tells which of the various buttons or axes are being manipulated
+* Eg:
+** KEY_S, KEY_CAPSLOCK, KEY_ESC, KEY_SPACE
+** REL_X, REL_Y
+** BTN_JOYSTICK, BTN_TRIGGER
+
+=== value
+* tells what the state or motion is.
+* Eg:
+** 1 for pressed, 0 for released
+
+== Overview
+   Application Interface: uevent
+   Hardware Interface: Serial
+
+== Application Interface:
+
+=== uevent:
+
+=== uinput:
+* A *kernel module*.
+* Emulate *input devices* from userspace.
+** Creates Virtual Input Device.
+** Events are passed through it.
+** Delivered to userspace.
+
+==== Steps to access uinput:
+. Open *File*.
+. Set *event*.
+. Register *keys*.
+. Set *Device Info*.
+. Create *virtual device*.
+. Write *data to device*.
+. Destroy *virtual device*.
+
+=== Interface:
+[source, c]
+-----
+linux/uinput.h
+-----
+* Defines *ioctl*'s request to create, set up, and destroy virtual devices.
+
+== Thanks

@@ -1,0 +1,76 @@
+:data-uri:
+= Telnet
+- Sikkandar & Dineshkumar
+
+== Problem:
+
+image::./computer.jpg[width=800, height=400]
+
+* How to log into another computer from one's own computer connected to same network? 
+
+== Telnet:
+
+* Telnet is a protocol used on the Internet or Local Area Networks to provide a bidirectional,
+interactive, text-oriented communication facility using a virtual terminal connection.
+
+* Developed in 1969.
+
+* Telnet works over TCP/IP protocol and is connection oriented.
+
+* Telnet is mainly designed for remote login to another computer.
+
+== Telnet Connection:
+
+image::./telnet.jpg[]
+
+== TCP Sessions and Client/Server Communication:
+
+* Interactive communication of data and commands between client and server over a prolonged period of time called session.
+* Telnet listens at port 23.
+
+image::client.gif[width=900]
+
+== How it works?
+
+. Connection is established between client and server.
+. In client program, Remote user enters the commands.
+. Data is transmitted over network via TCP 1 byte at a time.
+. Server program receives the command and executes command in its own terminal.
+. Then output is send back via network by server.
+. Client receives output and prints it.
+
+== Problems in sending and receiving data:
+* How data is sent
+* Different character set
+* Number of characters per line
+* Lines per screen
+
+== Network Virtual Terminal
+
+image::./nvt.png[width=800, height=400]
+
+* Imaginary terminal for universal communication in devices.
+* NVT defines a set of rules for how information is formatted and sent,
+such as character set, line termination.
+
+=== How NVT works
+
+* In Telnet Client converts data from Native language to NVT language.
+* Then data is send over Network as NVT language.
+* Server converts from NVT to native language and executes it.
+
+== Telnet Protocol Commands:
+
+* Input that a user enters at a terminal takes the form of data and commands.
+* Then sent to the application program.
+* Computer system provide a means by which a user can instruct the terminal to send certain commands
+that control how the terminal itself operates, and how it interacts with the computer to which it is connected.
+** For E.g Interrupt a process.
+
+== Telnet to access other servers:
+* Telnet NVT representation is used by a variety of other protocols such as SMTP, FTP and HTTP.
+* Telnet client can allow us to access other application servers.
+* Application servers port number must be specified to connect to the server.
+* Based on that particular server, commands are given.
+
+== Thankyou

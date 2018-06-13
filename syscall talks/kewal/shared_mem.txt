@@ -1,0 +1,69 @@
+:data-uri:
+
+= *IPC by Shared memory*
+- By : Kewal
+
+== *Types of IPC's available*
+* Pipe
+* Fifo (named pipe)
+* Shared memory
+* Message queue
+* Sockets (network communication)
+
+== *How memory get share*
+
+image::architecture.png[length = "200", width = "1000"]
+
+== *Posix based system calls for shared mem*
+
+*Create or open shared memory object*
+[source, c]
+---------------------
+int shm_open(const char *name, int oflag, mode_t mode);
+---------------------
+* name  - name of shm
+* oflag - flags
+* mode  - file permission
+* return val : file fd on success or -1
+
+*allocate size to shared memory*
+[source, c]
+---------------------
+int ftruncate(int fd, off_t length);
+---------------------
+* fd     - shm fd
+* length - size of shm
+* return val : 0 on success or -1
+
+*create maping on vertual address space*
+[source, c]
+---------------------
+void *mmap(void *addr, size_t length, int prot, int flags,
+                  int fd, off_t offset);
+---------------------
+* addr   - addr of maping
+* length - length of maping
+* prot   - decide memory protection
+* flags  - visiblity of map
+* fd     - shared mem fd
+* offset - offset to start access map
+* return val : map address on success or MAP_FAILED i.e.(void *)-1
+
+*unlink or delete shared memory*
+[source, c]
+---------------------
+int shm_unlink(const char *name);
+---------------------
+* name - shm name
+* return val : 0 on success or -1
+
+== *pros and cons*
+
+* The simplest form of IPC is shared memory.
+* Here the main issue is ConcurrencyControl.
+
+* pros: Very fast.
+
+* cons: Requires careful locking to avoid trouble. Doesn't work across multiple machines.
+
+== *THANK YOU*

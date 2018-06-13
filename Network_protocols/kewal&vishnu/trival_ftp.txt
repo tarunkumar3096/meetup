@@ -1,0 +1,66 @@
+:data-uri:
+
+= *Trivial File Transfer Protocol*
+- By : Vishnu and Kewal
+
+== *Uses*
+
+image::digram.png[length = "300", width = "1000"]
+
+* TFTP is used in situations where all the features of a full file transfer protocol like FTP are not needed
+* TFTP is mainly used during device bootstrap process for downloading device OS/firmware and configuration files
+* It is used along with boot protocols like DHCP to initialize devices
+
+== *TFTP Services*
+
+|===
+|*Provides :-*
+|Faster file transfer, as it uses UDP as the transport layer protocol
+|Lesser Code size or foot print
+|Netascii and Octet modes of file transfer
+|===
+
+|===
+|*Doesn't provides :-*
+|Does not provide authentication
+|Does not support a rich set of user interface commands
+|===
+
+== *Operation*
+* TFTP servers waits on the well known UDP port number 69.
+* The TFTP client then sends a read request (RRQ) to the server if it wants to get a file
+or sends a write request (WRQ) if it wants to transfer a file onto the server.
+* TFTP splits a file, to be transferred, into blocks of size 512 bytes and transfers it as TFTP DATA messages.
+Each TFTP DATA block is numbered and carried inside separate UDP messages.
+* The last block of a file is always sent with a size lesser than 512. When the peer receives a block with size less than 512 bytes,
+it treats that block as the last block of the file that is being transferred.
+
+
+== *Packets Layout*
+
+image::packet.png[length = "400", width = "1000"]
+
+== *Error Codes*
+
+|===
+|*Value*|*Meaning*
+|0|Not defined, see error message (if any).
+|1|File not found.
+|2|Access violation.
+|3|Disk full or allocation exceeded.
+|4|Illegal TFTP operation.
+|5|Unknown transfer ID.
+|6|File already exists.
+|7|No such user.
+|===
+
+
+== *Read sequence digram*
+
+image::READ.png[length = "200", width = "800"]
+
+== *Write sequence digram*
+
+image::write.png[length = "200", width = "800"]
+
+== *THANK YOU*

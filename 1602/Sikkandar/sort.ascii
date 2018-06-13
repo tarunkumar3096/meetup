@@ -1,0 +1,87 @@
+:data-uri:
+
+= Selection sort & Bubble sort
+- Sikkandar
+
+== Bubble sort
+* Element that should occupy the last position bubbles up
+* Slowest among the O(n^2^) sorts.
+* How to
+** Compare two adjacent elements and swap them if necessary.
+** Do it from beginning to end of list.
+** Repeat the above till the list is sorted
+
+== Visualization of bubble sort
+image::images/bub_sort_vis.gif[]
+
+== Example of bubble sort
+image::images/sel_ex.png[width=1000, height=600]
+
+== Implementation of bubble sort
+[source,c]
+----
+void bubble_sort( int A[ ], int n ) {
+
+    for(int k = 0; k< n-1; k++) {
+
+        // (n-k-1) is for ignoring comparisons of elements which have already been compared in earlier iterations
+        for(int i = 0; i < n-k-1; i++) {
+
+            if(A[ i ] > A[ i+1] ) {
+                // here swapping of positions is being done.
+                swap ( A[ min_index ], A[ i ]) ; 
+            }
+
+        }
+
+    }
+}
+----
+
+== Selection sort
+* Element that should occupy the first position in the list is selected from the list and swapped with current element in that position.
+* Slower than other O(n^2^) sorts, when the list gets longer
+* How to
+** Find the minimum element in the list and start appending it from first index.
+** Do it for n-1 times, where n is number of elements in the list.
+
+== Visualization of selection sort
+image::images/table.png[]
+
+== Visualization of selection sort
+image::images/sel_sort_graph.gif[]
+
+== Visualization of selection sort
+image::images/sel_sort_table.gif[width=500, height=500]
+
+== Example of selection sort
+image::images/bub_ex.png[width=1000, height=600]
+
+== Implementation of selection sort
+[source, c]
+----
+void selection_sort (int A[ ], int n) {
+        // temporary variable to store the position of minimum element
+        int min_index;        
+        
+        // reduces the effective size of the array by one in  each iteration.
+        for(int i = 0; i < n-1 ; i++)  {
+
+           // assuming the first element to be the minimum of the unsorted array .
+             min_index = i ;
+
+          // gives the effective size of the unsorted  array .
+
+            for(int j = i+1; j < n ; j++ ) {
+                if(A[ j ] < A[ min_index ])  {                //finds the minimum element
+                min_index = j ;
+                }
+             }
+
+          // putting minimum element on its proper position.
+          swap ( A[ min_index ], A[ i ]) ; 
+        }
+   }
+----
+
+== Thank you

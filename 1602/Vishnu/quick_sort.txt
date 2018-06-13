@@ -1,0 +1,57 @@
+:data-uri:
+
+== *Quicksort*
+Quicksort partitions an array into two sub-arrays and then calls itself recursively twice to sort sub-arrays. Partitioning is based on a specified value(say Pivot) that one array holds values smaller than the pivot and another holds values greater than the pivot.
+
+- *Pseudocode for recursive quick_sort function :*
+
+[source, c]
+---------------------
+/* low  --> Starting index,  high  --> Ending index */
+quick_sort(arr[], low, high)
+{
+  if (low < high) {
+    /* pi is partitioning index, arr[pi] is now
+       at right place */
+    pi = partition(arr, low, high);
+
+    quick_sort(arr, low, pi - 1);  // Before pi
+    quick_sort(arr, pi + 1, high); // After pi
+  }
+}
+---------------------
+  
+
+- *Pseudocode for partition function :*
+
+[source, c]
+---------------------
+/* This function takes last element as pivot, places
+   the pivot element at its correct position in sorted
+   array, and places all smaller (smaller than pivot)
+   to left of pivot and all greater elements to right
+   of pivot */
+partition (arr[], low, high)
+{
+    // pivot (Element to be placed at right position)
+    pivot = arr[high];  
+ 
+    i = (low - 1)  // Index of smaller element
+
+    for (j = low; j <= high- 1; j++) {
+        /* If current element is smaller than or
+           equal to pivot */
+        if (arr[j] <= pivot) {
+            i++;   // increment index of smaller element
+            swap arr[i] and arr[j]
+        }
+    }
+    swap arr[i + 1] and arr[high]
+    return (i + 1)
+}
+---------------------
+
+- *Time complexity* +
+Best case    : O(n*log(n)) +
+Average case : O(n*log(n)) +
+Worst case   : O(n*n)

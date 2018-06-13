@@ -1,0 +1,30 @@
+TFTP is a simple light weight application layer file transfer protocol, used for transferring  files over the network.
+
+TFTP was first standardized in 1981 and the current specification for the protocol can be found in RFC 1350.
+
+Uses:-
+> TFTP is used in situations where all the features of a full file transfer protocol like FTP are not needed
+> TFTP is mainly used during device bootstrap process for downloading device OS/firmware and configuration files
+> It is used along with boot protocols like DHCP to initialize devices
+
+TFTP provides:-
+> Faster file transfer, as it uses UDP as the transport layer protocol
+> Lesser Code size or foot print
+> Ascii and binary modes of file transfer
+
+TFTP does not provide:-
+> Does not provide authentication
+> Does not support a rich set of user interface commands
+
+Operation:-
+> TFTP servers waits on the well known UDP port number 69.
+> The TFTP client then sends a read request (RRQ) to the server if it wants to get a file or sends a write request (WRQ) if it wants to transfer a file onto the server.
+> TFTP splits a file, to be transferred, into blocks of size 512 bytes and transfers it as TFTP DATA messages. Each TFTP DATA block is numbered and carried inside separate UDP messages.
+> The last block of a file is always sent with a size lesser than 512. When the peer receives a block with size less than 512 bytes, it treats that block as the last block of the file that is being transferred.
+
+TFTP messages:-
+RRQ: Request to read a file
+WRQ: Request to write a file
+DATA: Contains a block of file data
+ACK: Used by peer to acknowledge each block of DATA
+ERROR: Used by peer to indicate erroneous operations
